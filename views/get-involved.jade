@@ -1,0 +1,81 @@
+extends layouts/base
+block body
+  section.what-can-i-do
+    .container.content-wrap
+      .row
+        .col-sm-7
+          h1 Get Involved In Kate's Campaign
+          p.lead What can you do to help? Volunteer your time and energy!
+
+          ul
+            li Call voters
+            li Put signs in my yard
+            li Host a meet and greet at my house
+            li Stuff envelopes
+            li Go door to door
+            li Be a staff intern
+
+        .col-sm-5
+          h2 Get In Touch With the Campaign
+          p Drop us a line and tell us how you can volunteer your time. 
+          form#volunteer-contact.volunteer-contact(action="", method="post")
+            fieldset.who
+              .form-group
+                label.control-label(for="name") Name
+                input.form-control(type="text", name="name")
+
+              .form-group
+                label.control-label(for="phone") Phone
+                input.form-control(type="text", name="phone")
+
+              .form-group
+                label.control-label(for="email") Email
+                input.form-control(type="text", name="email")
+
+              .form-group
+                button.btn.btn-lg.btn-default(type="submit") Submit
+
+  section.schedule
+    .container.content-wrap
+      .row
+        .col-sm-12
+          h2 Come Out and Meet Kate
+          p Find out when and where she will be next, and come say hello!
+
+          table.table
+            thead
+              tr
+                th Date
+                th Event
+                th Location
+
+            tbody
+              tr
+                td Sat, June 7th
+                td Coopertown Barrel Festival
+                td Coopertown, TN
+
+              tr
+                td Sat, Jun 14th
+                td A Tribute to Johnny MacRae
+                td Petway, TN
+
+              tr 
+                td Thur, June 19th @ 7 a.m.
+                td Good Morning Robertson County
+                td The Old School, Adams, TN
+
+              tr
+                td Fri/Sat, June 20th
+                td Unity days
+                td Governor's Square Mall, Clarksville, TN
+
+              tr
+                td Sat, June 21 @ 9:30 a.m.
+                td Red River Republican Women
+                td The Looking Glass Cafe, Clarksville, TN
+
+              tr
+                td Sat, Jun 28th @ 10 a.m.
+                td Veterans Political Forum
+                td Civic Center, Clarksville, TN

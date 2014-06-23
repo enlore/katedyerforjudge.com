@@ -1,0 +1,167 @@
+@phone: 360px;
+@small: 768px;
+@medium: 992px;
+@large: 1200px;
+
+@white: #fff;
+@footer-fg: @white;
+@content-fg: @white;
+@navbar-fg: @white;
+@btn-donate-bg: @white;
+
+@fuscia: #85343d;
+@banner-bg: @fuscia;
+@portrait-border: darken(@fuscia, 15%);
+@footer-bg: @fuscia;
+@email-cta-border: @fuscia;
+@navbar-bg: @fuscia;
+@btn-donate-fg: @fuscia;
+
+
+@dark-fuscia: #521F34;
+@content-wrap-bg: @dark-fuscia;
+
+@bright-fuscia: #D5005D;
+@content-bg: @bright-fuscia;
+
+@grey: #888;
+@intro-bg: @grey;
+@volunteer-bg: @grey;
+
+@navy-blue: #07002A;
+@body-bg: @navy-blue;
+
+@black: #000;
+@header-banner-border: @black;
+
+@masthead-image: url("/img/banner-big.png");
+@header-banner-img: url("http://placehold.it/1200x320?text=Banner");
+
+body {
+    font-size: 18px;
+    //background-color: @body-bg;
+    background-image: url('/img/french_parlor_pattern.png');
+    padding-top: 108px;
+}
+
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+    .navbar-nav > li > a {
+    }
+}
+
+.navbar-dyer {
+    background-color: @navbar-bg;
+
+    a {
+        color: @navbar-fg;
+    }
+
+    .btn-donate {
+        margin-bottom: 10px;
+        @media (min-width: @small) {
+                margin-top: 20px; 
+            }
+    }
+}
+
+
+.lato { font-family: 'Lato', sans-serif; font-weight: 900; }
+.bitter { font-family: 'Bitter', serif; }
+
+h1, .h1, h2, .h2, h3, .h3 { .lato; }
+h4, .h4, p, a, span, li { .bitter; }
+
+li {
+    list-style-image: url('/img/gavel.png');
+}
+
+blockquote {
+    p { font-size: 22px; }
+    cite { font-size: 18px; }
+}
+
+.btn-donate {
+    background-color: @btn-donate-bg;
+    color: @btn-donate-fg;
+}
+
+.btn-lg {
+    padding: 12px 28px;
+    font-size: 22px;
+    line-height: 1.44;
+    border-radius: 6px;
+}
+
+header {
+    padding-top: 1em;
+    padding-bottom: 2em;
+    margin-bottom: 3em;
+    background-image: @masthead-image;
+    background-position: center center;
+    color: @white;
+    display: block;
+    height: 315px;
+
+    @media (min-width: @small) {
+        padding-top: 2em;
+    }
+
+    .banner {
+        height: 310px; 
+        border: 5px solid @header-banner-border;
+        background-image: @header-banner-img;
+        background-position: center center;
+        padding: 1em;
+    }
+}
+
+footer,
+section {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    @media  (min-width: @small) {
+    }
+}
+
+.content-wrap {
+    //background-color: @content-wrap-bg;
+    background-color: rgba(235, 29, 18, 0.6);
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 4em;
+    padding-right: 4em;
+    color: @content-fg;
+}
+
+.family {}
+.education {}
+.involvement {}
+.experience {}
+
+.schedule {
+    padding-bottom: 2em;
+
+    @media  (min-width: @small) {
+        padding-bottom: 4em;
+    }
+}
+
+
+.address {
+   padding-top: 1em;
+}
+
+footer {
+    background-color: @footer-bg;
+    color: @footer-fg;
+
+    @media (min-width: @small) {
+
+    }
+
+    .byline {
+        padding-top: 1em; 
+    }
+}
