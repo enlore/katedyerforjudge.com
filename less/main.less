@@ -7,19 +7,25 @@
 @footer-fg: @white;
 @content-fg: @white;
 @navbar-fg: @white;
-@btn-donate-bg: @white;
+@btn-donate-fg: @white;
 
-@fuscia: #85343d;
+@fuscia: #D44937;
 @banner-bg: @fuscia;
 @portrait-border: darken(@fuscia, 15%);
 @footer-bg: @fuscia;
 @email-cta-border: @fuscia;
 @navbar-bg: @fuscia;
-@btn-donate-fg: @fuscia;
 
+@teal: rgba(1, 171, 194, 0.7);
+@content-wrap-bg: @teal;
+@btn-donate-bg: @teal;
 
-@dark-fuscia: #521F34;
-@content-wrap-bg: @dark-fuscia;
+@blue: #6455B6;
+@content-border: @blue;
+@content-shadow: @blue;
+@header-banner-border: darken(@blue, 30%);
+@anchor-fg: darken(@blue, 30%);
+@banner-border: @blue;
 
 @bright-fuscia: #D5005D;
 @content-bg: @bright-fuscia;
@@ -32,7 +38,6 @@
 @body-bg: @navy-blue;
 
 @black: #000;
-@header-banner-border: @black;
 
 @masthead-image: url("/img/banner-big.png");
 @header-banner-img: url("http://placehold.it/1200x320?text=Banner");
@@ -41,7 +46,8 @@ body {
     font-size: 18px;
     //background-color: @body-bg;
     background-image: url('/img/french_parlor_pattern.png');
-    padding-top: 108px;
+    //padding-top: 108px;
+    padding-top: 76px;
 }
 
 .navbar {
@@ -60,8 +66,9 @@ body {
 
     .btn-donate {
         margin-bottom: 10px;
+
         @media (min-width: @small) {
-                margin-top: 20px; 
+                margin-top: 10px; 
             }
     }
 }
@@ -72,6 +79,8 @@ body {
 
 h1, .h1, h2, .h2, h3, .h3 { .lato; }
 h4, .h4, p, a, span, li { .bitter; }
+
+a { color: @anchor-fg; }
 
 li {
     list-style-image: url('/img/gavel.png');
@@ -100,6 +109,7 @@ header {
     margin-bottom: 3em;
     background-image: @masthead-image;
     background-position: center center;
+    border-bottom: 5px solid @header-banner-border;
     color: @white;
     display: block;
     height: 315px;
@@ -126,8 +136,11 @@ section {
 }
 
 .content-wrap {
-    //background-color: @content-wrap-bg;
-    background-color: rgba(235, 29, 18, 0.6);
+    background-color: @content-wrap-bg;
+    //border-top: 2px solid @content-border;
+    //border-bottom: 2px solid @content-border;
+    box-shadow: 0px 6px 1px -4px @content-shadow;
+    border-radius: 7px;
     padding-top: 2em;
     padding-bottom: 2em;
     padding-left: 4em;
@@ -148,13 +161,9 @@ section {
     }
 }
 
-
-.address {
-   padding-top: 1em;
-}
-
 footer {
     background-color: @footer-bg;
+    border-top: 5px solid @header-banner-border;
     color: @footer-fg;
 
     @media (min-width: @small) {
