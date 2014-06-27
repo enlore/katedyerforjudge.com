@@ -1,10 +1,37 @@
 extends layouts/base
 block body
-  section.donate
+  section#donate.donate
     .container.content-wrap
       .row
-        .col-sm-6.col-sm-offset-6
-          h1 Donate Page
+        .col-sm-6
+          h1 Make a Contribution to the Campaign
+          p.lead Kate Dyer needs your help to win this election. Vote, volunteer, and donate.
+          p.
+            Being qualified isn't the only thing that wins elections! While
+            Kate is the best person for the job, she still needs every bit
+            of help she can get in pursuit of getting the word out.
+
+          p.
+            Every dollar you give out of support for Kate brings her one step
+            closer to winning that seat.
+
+          p.
+            If you donate, here's what we'll do with the money:
+
+          ul
+            li Buy road signs, large and small
+            li Purchase advertising
+
+          img.img-responsive.center-block(src="http://placehold.it/500x500&text=Kate's Thanks Pic")
+
+          p.
+            We want to tell you that everything makes a difference, from a handshake to a dollar
+            to an hour spent helping Kate's campaign, but, most of all, we want to say
+
+          p.h1.text-center Thank You!
+
+        .col-sm-6
+          h2 Make a Donation
           form#donate-form.donate-form(action="", method="post")
             fieldset
               legend Personal Info
@@ -32,8 +59,16 @@ block body
                 a couple of words.
 
               .form-group
-                label() Address
+                label() Your Street Address
                 input.form-control(type="text", name="address")
+
+              .form-group
+                label() Your City
+                input.form-control(type="text", name="city")
+
+              .form-group
+                label() Your Zip Code
+                input.form-control(type="text", name="zip_code")
 
               .form-group
                 label(for="") Your Occupation
@@ -41,55 +76,20 @@ block body
 
               .form-group
                 label(for="") Your Employer
-                input.form-control(type="text", name="occupation")
-
-            fieldset
-              legend Card Info
-              span.errors
-              .form-group
-                .row
-                  .col-sm-6
-                    label(for="card-number") Number
-                    input.form-control(type="text", size=16, data-stripe="number", value='4242424242424242')
-
-                  .col-sm-2
-                    label(for="card-cvc") CVC
-                    input.form-control(type="text", data-stripe="cvc", value='444')
-
-              .form-group
-                .row
-                  .col-sm-4
-                    label(for="card-exp-month") Exp Month
-                    select.form-control(data-stripe="exp-month")
-                      option(value="01") 01
-                      option(value="02") 02
-                      option(value="03") 03
-                      option(value="04") 04
-                      option(value="05") 05
-                      option(value="06") 06
-                      option(value="07") 07 
-                      option(value="08") 08 
-                      option(value="09") 09 
-                      option(value="10") 10
-                      option(value="11") 11
-                      option(value="12") 12
-
-                  .col-sm-4
-                    label(for="card-exp-year") Exp Year
-                    input.form-control(type="text", data-stripe="exp-year", value='2015')
+                input.form-control(type="text", name="employer")
 
             fieldset
               legend Your Donation
               .form-group
                 label(for="") Amount
                 select#amount-select.form-control(name="amount")
-                  option(value="500") $5.00
-                  option(value="1000") $10.00
-                  option(value="2000") $20.00
-                  option(value="3500") $35.00
-                  option(value="5000") $50.00
-                  option(value="7500") $75.00
-                  option(value="10000") $100.00
+                  option(value="5") $5.00
+                  option(value="10") $10.00
+                  option(value="20") $20.00
+                  option(value="35") $35.00
+                  option(value="50") $50.00
+                  option(value="75") $75.00
+                  option(value="100") $100.00
 
                 .checkbox
                   label
@@ -99,4 +99,4 @@ block body
                 #other-amount-container
 
             .form-group
-              button.btn.btn-donate.btn-lg(type="submit") Make Your Donation
+              button.btn.btn-donate.btn-lg(type="submit") Confirm and Enter Card
