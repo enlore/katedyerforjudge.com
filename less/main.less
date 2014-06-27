@@ -10,7 +10,6 @@
 @footer-bg: @burgundy;
 @footer-border: darken(@burgundy, 15%);
 
-
 @white: #fff;
 @footer-fg: @white;
 @navbar-fg: @white;
@@ -55,6 +54,8 @@
 
 @masthead-image: url("/img/banner-big.png");
 @header-banner-img: url("http://placehold.it/1200x320?text=Banner");
+
+@import 'gradients';
 
 body {
     font-size: 18px;
@@ -128,8 +129,10 @@ blockquote {
 }
 
 .btn-donate {
-    background-color: @btn-donate-bg;
+    border-bottom: 2px solid darken(@btn-donate-bg, 15%);
+    border-right: 1px solid darken(@btn-donate-bg, 15%);
     color: @btn-donate-fg;
+    #gradient > .vertical(lighten(@btn-donate-bg, 25%), @btn-donate-bg);
 }
 
 .btn-lg {
@@ -211,14 +214,18 @@ footer {
     }
 
     .countdown-timer {
-        padding: 0.6em;
+        padding: 0.8em;
         border-radius: 7px;
         background-color: @light-teal;     
+
+        .h2 { margin: 0; }
 
         #timer.is-countdown {
             border: none;
             border-radius: 7px;
             background-color: @light-teal;     
+            padding: 0.4em;
+            padding-left: 0.1em;
 
             .countdown-section {
                 text-align: left; 
