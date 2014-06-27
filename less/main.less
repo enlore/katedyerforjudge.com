@@ -3,22 +3,35 @@
 @medium: 992px;
 @large: 1200px;
 
+@burgundy: #85343D;
+@burgundy: #dd4b39;
+@navbar-bg: @burgundy;
+@navbar-border: darken(@burgundy, 15%);
+@footer-bg: @burgundy;
+@footer-border: darken(@burgundy, 15%);
+
+
 @white: #fff;
 @footer-fg: @white;
-@content-fg: @white;
 @navbar-fg: @white;
 @btn-donate-fg: @white;
 
-@fuscia: #D44937;
-@banner-bg: @fuscia;
-@portrait-border: darken(@fuscia, 15%);
-@footer-bg: @fuscia;
-@email-cta-border: @fuscia;
-@navbar-bg: @fuscia;
+@lavendar-pewter: #B8B6BA;
+@lavendar-pewter: #67799f;
+@lavendar-pewter: rgba(162, 168, 180, 0.7); 
+@content-wrap-bg: @lavendar-pewter;
 
-@teal: rgba(1, 171, 194, 0.7);
-@content-wrap-bg: @teal;
+@lavendar-pewter-fallback: #A2A8B4;
+@content-wrap-bg-fallback: @lavendar-pewter-fallback;
+
+@teal: #29899C;
 @btn-donate-bg: @teal;
+@navbar-toggle-bg: @teal; 
+@navbar-toggle-border: darken(@teal, 15%);
+@icon-bar: lighten(@teal, 15%);
+
+@light-teal: #4bc1cf;
+@navbar-fg-hover: @light-teal;
 
 @blue: #6455B6;
 @content-border: @blue;
@@ -37,28 +50,39 @@
 @navy-blue: #07002A;
 @body-bg: @navy-blue;
 
-@black: #000;
+@black: #141414;
+@content-fg: @black;
 
 @masthead-image: url("/img/banner-big.png");
 @header-banner-img: url("http://placehold.it/1200x320?text=Banner");
 
 body {
     font-size: 18px;
-    //background-color: @body-bg;
     background-image: url('/img/french_parlor_pattern.png');
-    //padding-top: 108px;
-    padding-top: 76px;
+    padding-top: 58px;
 }
 
 .navbar {
     border-radius: 0;
     margin-bottom: 0;
     .navbar-nav > li > a {
+        &:hover, &:active {
+            background-color: transparent; 
+            color: @navbar-fg-hover;
+        }
     }
 }
 
 .navbar-dyer {
     background-color: @navbar-bg;
+    border-bottom: 5px solid @navbar-border;
+    .navbar-toggle {
+        background-color: @navbar-toggle-bg; 
+        border: 1px solid @navbar-toggle-border;
+        .icon-bar {
+            background-color: @icon-bar; 
+        }
+    }
 
     a {
         color: @navbar-fg;
@@ -73,6 +97,18 @@ body {
     }
 }
 
+.form-group .checkbox {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    span {
+        line-height: 40px; 
+    }
+    input {
+        width: 30px; 
+        height: 30px;
+
+    }
+}
 
 .lato { font-family: 'Lato', sans-serif; font-weight: 900; }
 .bitter { font-family: 'Bitter', serif; }
@@ -83,7 +119,7 @@ h4, .h4, p, a, span, li { .bitter; }
 a { color: @anchor-fg; }
 
 li {
-    list-style-image: url('/img/gavel.png');
+    list-style-image: url('/img/gavel.gif');
 }
 
 blockquote {
@@ -120,7 +156,7 @@ header {
 
     .banner {
         height: 310px; 
-        border: 5px solid @header-banner-border;
+        border: 9px solid @header-banner-border;
         background-image: @header-banner-img;
         background-position: center center;
         padding: 1em;
@@ -163,7 +199,7 @@ section {
 
 footer {
     background-color: @footer-bg;
-    border-top: 5px solid @header-banner-border;
+    border-top: 5px solid @footer-border;
     color: @footer-fg;
 
     @media (min-width: @small) {
@@ -172,5 +208,21 @@ footer {
 
     .byline {
         padding-top: 1em; 
+    }
+
+    .countdown-timer {
+        padding: 0.6em;
+        border-radius: 7px;
+        background-color: @light-teal;     
+
+        #timer.is-countdown {
+            border: none;
+            border-radius: 7px;
+            background-color: @light-teal;     
+
+            .countdown-section {
+                text-align: left; 
+            }
+        }
     }
 }

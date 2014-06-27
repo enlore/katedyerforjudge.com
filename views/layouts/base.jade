@@ -8,6 +8,8 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1")
 
     link(rel="stylesheet", href="/css/vendor/bootstrap.min.css")
+    link(rel="stylesheet", href="/css/vendor/jquery.countdown.css")
+
     link(href='http://fonts.googleapis.com/css?family=Lato:900', rel='stylesheet', type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Bitter', rel='stylesheet', type='text/css')
     link(rel="stylesheet", href="/css/main.css")
@@ -31,6 +33,10 @@ html(lang="en")
 
     include includes/footer.jade
 
+    script(type="text/javascript", src="https://js.stripe.com/v2/")
+
     script(type="application/javascript", src="/js/vendor/jquery-2.1.1.min.js")
+    script(type="application/javascript", src="/js/vendor/jquery.plugin.min.js")
+    script(type="application/javascript", src="/js/vendor/jquery.countdown.min.js")
     script(type="application/javascript", src="/js/vendor/bootstrap.min.js")
     script(type="application/javascript", src="/js/main.js")

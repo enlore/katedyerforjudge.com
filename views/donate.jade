@@ -1,0 +1,102 @@
+extends layouts/base
+block body
+  section.donate
+    .container.content-wrap
+      .row
+        .col-sm-6.col-sm-offset-6
+          h1 Donate Page
+          form#donate-form.donate-form(action="", method="post")
+            fieldset
+              legend Personal Info
+              .form-group
+                label(for="") Your Name
+                input.form-control(type="text", name="human_name")
+
+              .form-group
+                label(for="") Your Phone
+                input.form-control(type="text", name="phone")
+
+              .form-group
+                label(for="") Your Email
+                input.form-control(type="text", name="email")
+
+            fieldset
+              legend Donation Info
+              p.hint. 
+                The law requires us to collect this info.  You can put
+                "N/A" if you're not employed, or "self-employed" if you
+                are self employed.
+
+              p.hint.
+                If you put "self-employed", please describe what you do in
+                a couple of words.
+
+              .form-group
+                label() Address
+                input.form-control(type="text", name="address")
+
+              .form-group
+                label(for="") Your Occupation
+                input.form-control(type="text", name="occupation")
+
+              .form-group
+                label(for="") Your Employer
+                input.form-control(type="text", name="occupation")
+
+            fieldset
+              legend Card Info
+              span.errors
+              .form-group
+                .row
+                  .col-sm-6
+                    label(for="card-number") Number
+                    input.form-control(type="text", size=16, data-stripe="number", value='4242424242424242')
+
+                  .col-sm-2
+                    label(for="card-cvc") CVC
+                    input.form-control(type="text", data-stripe="cvc", value='444')
+
+              .form-group
+                .row
+                  .col-sm-4
+                    label(for="card-exp-month") Exp Month
+                    select.form-control(data-stripe="exp-month")
+                      option(value="01") 01
+                      option(value="02") 02
+                      option(value="03") 03
+                      option(value="04") 04
+                      option(value="05") 05
+                      option(value="06") 06
+                      option(value="07") 07 
+                      option(value="08") 08 
+                      option(value="09") 09 
+                      option(value="10") 10
+                      option(value="11") 11
+                      option(value="12") 12
+
+                  .col-sm-4
+                    label(for="card-exp-year") Exp Year
+                    input.form-control(type="text", data-stripe="exp-year", value='2015')
+
+            fieldset
+              legend Your Donation
+              .form-group
+                label(for="") Amount
+                select#amount-select.form-control(name="amount")
+                  option(value="500") $5.00
+                  option(value="1000") $10.00
+                  option(value="2000") $20.00
+                  option(value="3500") $35.00
+                  option(value="5000") $50.00
+                  option(value="7500") $75.00
+                  option(value="10000") $100.00
+
+                .checkbox
+                  label
+                    input#other-checkbox.form-control(type="checkbox", name="amount_other", value="true")
+                    span &nbsp;Other
+
+                #other-amount-container
+
+            .form-group
+              button.btn.btn-donate.btn-lg(type="submit") Make Your Donation

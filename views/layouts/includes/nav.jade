@@ -7,7 +7,7 @@ nav.navbar-dyer.navbar.navbar-fixed-top
         span.icon-bar
 
       a(href="/")
-        img.img-responsive.navbar-left.navbar-brand(src="/img/logo-sm.png")
+        img.navbar-left.navbar-brand(src="/img/logo-long.png")
 
     #navbar-collapse.navbar-collapse.collapse
       ul.navbar-nav.nav.navbar-left
@@ -20,4 +20,14 @@ nav.navbar-dyer.navbar.navbar-fixed-top
         li
           a(href="/donate") Donate
 
-      button.btn.btn-lg.btn-donate.navbar-right(type="button") Donate
+      button.btn.btn-donate.navbar-right(type="button") Donate
+      //
+        form.navbar-right.navbar-btn(action="",  method="POST")
+          script(
+            src="https://checkout.stripe.com/checkout.js",
+            class="stripe-button",
+            data-key="pk_test_gaLOWFmLlT7GpIAzmhMvmubG",
+            data-amount="2000",
+            data-name="Demo Site",
+            data-description="2 widgets ($20.00)",
+            data-image="/128x128.png")
