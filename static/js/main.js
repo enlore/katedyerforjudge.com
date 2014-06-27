@@ -1,10 +1,11 @@
 $(document).ready(function () {
-    $('#timer').countdown({until: new Date(2014, 8 - 1, 8), compact: true})
+    $('#timer-ultimate').countdown({ until: new Date(2014, 8 - 1, 8), compact: true })
+    $('#timer-early').countdown({until: new Date(2014, 7 - 1, 23), compact: true })
 
     // Stripe
     Stripe.setPublishableKey('pk_test_gaLOWFmLlT7GpIAzmhMvmubG')
 
-    $donateForm = $("#donate-form").on('submit', function (e) {
+    $donateForm = $("#confirm-donate").on('submit', function (e) {
         e.preventDefault() 
 
         $donateForm.find('[type=submit]').prop('disabled', true)
