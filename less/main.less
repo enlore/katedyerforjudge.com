@@ -29,6 +29,8 @@
 @navbar-toggle-border: darken(@teal, 15%);
 @icon-bar: lighten(@teal, 15%);
 
+@anchor-fg: lighten(@teal, 20%);
+
 @light-teal: #4bc1cf;
 @navbar-fg-hover: @light-teal;
 
@@ -36,7 +38,6 @@
 @content-border: @blue;
 @content-shadow: @blue;
 @header-banner-border: darken(@blue, 30%);
-@anchor-fg: darken(@blue, 30%);
 @banner-border: @blue;
 
 @bright-fuscia: #D5005D;
@@ -56,6 +57,7 @@
 @header-banner-img: url("http://placehold.it/1200x320?text=Banner");
 
 @import 'gradients';
+@import 'util.less';
 
 body {
     font-size: 18px;
@@ -117,7 +119,12 @@ body {
 h1, .h1, h2, .h2, h3, .h3 { .lato; }
 h4, .h4, p, a, span, li { .bitter; }
 
-a { color: @anchor-fg; }
+a {
+    color: @anchor-fg;
+    &:hover,&:active {
+        color: lighten(@anchor-fg, 25%);
+    }
+}
 
 li {
     list-style-image: url('/img/gavel.gif');
@@ -185,12 +192,21 @@ section {
     padding-left: 4em;
     padding-right: 4em;
     color: @content-fg;
+
+    h1, h2, h3, .h1, .h2, .h3 {
+        .body-text-shadow(lighten(@content-wrap-bg, 35%));
+    }
 }
 
 .family {}
 .education {}
 .involvement {}
 .experience {}
+.donate {
+    img {
+        margin-bottom: 20px; 
+    }
+}
 
 .schedule {
     padding-bottom: 2em;
@@ -209,23 +225,28 @@ footer {
 
     }
 
+    .address {
+        h3 { margin-top: 0; } 
+        .body-text-shadow(darken(@footer-bg, 25%));
+    }
+
     .byline {
         padding-top: 1em; 
+        .body-text-shadow(darken(@footer-bg, 25%));
     }
 
     .countdown-timer {
-        padding: 0.8em;
+        padding: 0.3em 0.2em 0 0.6em;
         border-radius: 7px;
         background-color: @light-teal;     
 
-        .h2 { margin: 0; }
+        .h3 { margin: 0; }
 
-        #timer.is-countdown {
+        .is-countdown {
             border: none;
             border-radius: 7px;
-            background-color: @light-teal;     
-            padding: 0.4em;
-            padding-left: 0.1em;
+            background-color: transparent;
+            font-size: 14px;
 
             .countdown-section {
                 text-align: left; 
