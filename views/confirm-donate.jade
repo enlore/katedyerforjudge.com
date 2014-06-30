@@ -6,6 +6,9 @@ block body
         .col-sm-6.col-sm-offset-3
           h1 Confirm Your Info
           form#confirm-donate(action="/confirm", method="post")
+            input(type="hidden", name="_csrf", value="#{csrf_token}")
+            input(type="text", name="shh", class="shh")
+
             fieldset
               legend Personal Info
               .form-group

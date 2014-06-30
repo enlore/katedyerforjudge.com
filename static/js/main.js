@@ -5,24 +5,70 @@ $(document).ready(function () {
     // Stripe
     Stripe.setPublishableKey('pk_test_gaLOWFmLlT7GpIAzmhMvmubG')
 
-    $donateForm = $("#confirm-donate").on('submit', function (e) {
+    // donation info form
+    var $donateForm = $('#donate-form')
+
+    $donateForm.on('submit', function (e) {
         e.preventDefault() 
 
-        $donateForm.find('[type=submit]').prop('disabled', true)
+        var fieldsMessages = [
+            {'name': 'human_name', 'message': 'Please provide your full name.'},
+            {'name': 'email', 'message': 'Please enter your email.'},
+            {'name': 'phone', 'message': 'Please list your phone number.'},
+            {'name': 'address', 'message': 'Please fill in your address.'},
+            {'name': 'city', 'message': 'Please indicate your city.'},
+            {'name': 'zip_code', 'message': 'Please give your zip code.'},
+            {'name': 'occupation', 'message': 'Please tell us your occupation.'},
+            {'name': 'employer', 'message': 'Please state the name of your employer.'}
+        ]
 
-        Stripe.card.createToken($donateForm, function (stat, response) {
+        var hasError = false
+
+        for (var i = 0; i < fieldsMessages.length; i++) {
+            var selector = '[name="'+ fieldsMessages[i]['name']  + '"]'
+
+            var val = $donateForm.find(selector).val()
+            console.log('val of %s: %s', fieldsMessages[i]['name'], val)
+
+            if (val === '') {
+                console.log('Validation error: %s', fieldsMessages[i]['message'])  
+                hasError = true
+                $donateForm.find('label[for="' + fieldsMessages[i]['name']+ '"]').text(fieldsMessages[i]['message']).parent().addClass('has-error')
+            }
+
+            if (!hasError)
+                e.target.submit()
+        }
+
+        // get val from input by name
+        // if empty string, reject
+        //  reject: swap out label for help message
+        //  if no rejections, submit form
+    })
+
+    // confirm form
+    var $confirmForm = $("#confirm-donate")
+
+    $confirmForm.on('submit', function (e) {
+        e.preventDefault() 
+
+
+        $confirmForm.find('[type=submit]').prop('disabled', true)
+
+        Stripe.card.createToken($confirmForm, function (stat, response) {
             if (response.error) {
-                $donateForm.find('.errors').text(response.error.message) 
-                $donateForm.find('[type=submit]').prop('disabled', false)
+                $confirmForm.find('.errors').text(response.error.message) 
+                $confirmForm.find('[type=submit]').prop('disabled', false)
             } else {
                 var token = response.id
                 console.log(token)
 
-                $donateForm.append($('<input type="hidden" name="stripeToken">').val(token))
+                $confirmForm.append($('<input type="hidden" name="stripeToken">').val(token))
                 e.target.submit()
             }
         })
     })
+
 
     // Checkbox donation form handler
     var $otherCheckbox      = $('#other-checkbox')

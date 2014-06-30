@@ -19,6 +19,9 @@ block body
           h2 Get In Touch With the Campaign
           p Drop us a line and tell us how you can volunteer your time. 
           form#volunteer-contact.volunteer-contact(action="", method="post")
+            input(type="hidden", name="_csrf", value="#{csrf_token}")
+            input(type="text", name="shh", class="shh")
+
             fieldset.who
               .form-group
                 label.control-label(for="name") Name

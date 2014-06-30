@@ -1,70 +1,100 @@
-var express     = require('express')
-  , path        = require('path')
-  , less        = require('less-middleware')
-  , fs          = require('fs')
-  , config      = JSON.parse(fs.readFileSync('config.json'))
-  , bodyParser  = require('body-parser')
-  , session     = require('express-session')
+var express         = require('express')
+  , path            = require('path')
+  , less            = require('less-middleware')
+  , fs              = require('fs')
+  , config          = JSON.parse(fs.readFileSync('config.json'))
+  , bodyParser      = require('body-parser')
+  , session         = require('express-session')
   , cookieParser    = require('cookie-parser')
-  , app         = express()
-  , stripe      = require('stripe')('sk_test_75v3BBW80vcLslnEL5nQmSLM')
-  , Mailgun     = require('mailgun').Mailgun
-  , mg          = new Mailgun('key-1le00ub2z3uc8onmlmnk2sdph6-484v5', 'v2')
-  , jade        = require('jade')
+  , csurf           = require('csurf')
+  , app             = express()
+  , stripe          = require('stripe')('sk_test_75v3BBW80vcLslnEL5nQmSLM')
+  , Mailgun         = require('mailgun').Mailgun
+  , mg              = new Mailgun('key-1le00ub2z3uc8onmlmnk2sdph6-484v5', 'v2')
+  , compress        = require('compression')
+  , morgan          = require('morgan')
+  , jade            = require('jade')
+  , helmet          = require('helmet')
   ;
 
 app.set('env', process.env.ENV || 'production')
-
-app.set('sender', 'site@katedyerforjudge.com')
-app.set()
+app.set('sender', config.sender || "app")
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
-app.set('trust proxy')
+app.set('trust proxy', 1)
 
 var lessOptions = {
     debug: false,
     dest: path.join(__dirname, 'static'),
     preprocess: {
         path: function (pathname, req) {
-            console.log(pathname)
-            console.log(pathname.replace('/css', ''))
             return pathname.replace('/css', '') 
         } 
     }
 }
 
 var sessionOptions = {
-    name: '',
-    secret: 'js843j*&l8d&Dj30)W$jjfd*&S)@@53',
+    name: 'dyer.sid',
+    secret: config.secret,
+    proxy: true,
     cookie: {
         secure: false,
+        httpOnly: true,
         maxAge: 60000 * 10
+    }
+}
+
+var csurfOptions = {}
+
+var compressOptions = {}
+
+var morganOptions = {
+    format: 'dev',
+    skip: function (req, res) {
+        return res.statusCode === 304 
     }
 }
 
 // env based config
 if (app.get('env') === 'production') {
     app.set('port', config.port)
-    sessionOptions.cookie.secure = true
-
+    //sessionOptions.cookie.secure = true
 } else {
     app.set('port', process.env.PORT || 3000)
     lessOptions.debug = false
 }
 
+app.use(helmet())
+app.use(morgan(morganOptions))
+app.use(compress(compressOptions))
+app.use(cookieParser())
 app.use(session(sessionOptions))
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(csurf(csurfOptions))
 app.use(less(path.join(__dirname, 'less'), lessOptions))
 app.use(express.static(path.join(__dirname, 'static')))
+
+app.use(function (req, res, next) {
+    console.log('secure? %s', req.secure)
+    next()
+})
+
+app.use(function (req, res, next) {
+    res.locals.csrf_token = req.csrfToken()
+    next()
+})
 
 // api
 app.get('/', function (req, res) { res.render('index') })
 app.get('/about', function (req, res) { res.render('about') })
 app.get('/get-involved', function (req, res) { res.render('get-involved') })
+app.get('/thank-you', function (req, res) { res.render('thank-you') })
+
 app.get('/donate', function (req, res) { res.render('donate') })
 
 app.post('/donate', function (req, res) {
+    console.log('token', req.body._csrf)
     // stick the form fields in the session (having already been validated client side)
     req.session.form = {
         human_name  : req.body.human_name,
@@ -87,6 +117,7 @@ app.post('/donate', function (req, res) {
 })
 
 app.get('/confirm', function (req, res) {
+    console.log(req.session.form)
     res.render('confirm-donate', {form: req.session.form})
 })
 
@@ -107,7 +138,7 @@ app.post('/confirm', function (req, res) {
         var emailTemplate = path.join(__dirname, 'views', 'donation-email.jade')
 
         var templateVals = {
-            human_name      : req.body.human_name, 
+            human_name      : req.body.human_name,
             phone           : req.body.phone,
             email           : req.body.email,
             address         : req.body.address,

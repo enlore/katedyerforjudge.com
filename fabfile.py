@@ -8,7 +8,7 @@ def pack():
     pass
 
 def stage():
-    local('tar cvzf dist/dist.tar.gz app.js static views package.json config.json')
+    local('tar cvzf dist/dist.tar.gz app.js static views package.json')
 
     put('dist/dist.tar.gz', '/tmp')
 

@@ -4,11 +4,15 @@
 @large: 1200px;
 
 @burgundy: #85343D;
-@burgundy: #dd4b39;
-@navbar-bg: @burgundy;
-@navbar-border: darken(@burgundy, 15%);
-@footer-bg: @burgundy;
-@footer-border: darken(@burgundy, 15%);
+@burgundy: rgba(133, 52, 61, 0.7);
+@header-banner-bg: @burgundy;
+
+@red: #dd4b39;
+@navbar-bg: @red;
+@navbar-border: darken(@red, 15%);
+@footer-bg: @red;
+@footer-border: darken(@red, 15%);
+@form-error: @red;
 
 @white: #fff;
 @footer-fg: @white;
@@ -54,10 +58,12 @@
 @content-fg: @black;
 
 @masthead-image: url("/img/banner-big.png");
-@header-banner-img: url("http://placehold.it/1200x320?text=Banner");
+@header-banner-img: url("/img/header-banner.png");
 
 @import 'gradients';
 @import 'util.less';
+
+.shh { display: none; }
 
 body {
     font-size: 18px;
@@ -127,7 +133,7 @@ a {
 }
 
 li {
-    list-style-image: url('/img/gavel.gif');
+    list-style-image: url('/img/gavel.png');
 }
 
 blockquote {
@@ -140,6 +146,9 @@ blockquote {
     border-right: 1px solid darken(@btn-donate-bg, 15%);
     color: @btn-donate-fg;
     #gradient > .vertical(lighten(@btn-donate-bg, 25%), @btn-donate-bg);
+    &:active {
+        background-color: @btn-donate-bg;
+    }
 }
 
 .btn-lg {
@@ -167,9 +176,10 @@ header {
     .banner {
         height: 310px; 
         border: 9px solid @header-banner-border;
-        background-image: @header-banner-img;
+        //background-image: @header-banner-img;
         background-position: center center;
         padding: 1em;
+        background-color: @header-banner-bg;
     }
 }
 
@@ -202,6 +212,12 @@ section {
 .education {}
 .involvement {}
 .experience {}
+.thank-you {
+    a {
+        color: lighten(@footer-bg, 10%);
+        //text-shadow: none; 
+    }
+}
 .donate {
     img {
         margin-bottom: 20px; 

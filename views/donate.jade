@@ -33,18 +33,21 @@ block body
         .col-sm-6
           h2 Make a Donation
           form#donate-form.donate-form(action="", method="post")
+            input(type="hidden", name="_csrf", value="#{csrf_token}")
+            input(type="text", name="shh", class="shh")
+
             fieldset
               legend Personal Info
               .form-group
-                label(for="") Your Name
+                label(for="human_name") Your Name
                 input.form-control(type="text", name="human_name")
 
               .form-group
-                label(for="") Your Phone
+                label(for="phone") Your Phone
                 input.form-control(type="text", name="phone")
 
               .form-group
-                label(for="") Your Email
+                label(for="email") Your Email
                 input.form-control(type="text", name="email")
 
             fieldset
@@ -59,29 +62,29 @@ block body
                 a couple of words.
 
               .form-group
-                label() Your Street Address
+                label(for="address") Your Street Address
                 input.form-control(type="text", name="address")
 
               .form-group
-                label() Your City
+                label(for="city") Your City
                 input.form-control(type="text", name="city")
 
               .form-group
-                label() Your Zip Code
+                label(for="zip_code") Your Zip Code
                 input.form-control(type="text", name="zip_code")
 
               .form-group
-                label(for="") Your Occupation
+                label(for="occupation") Your Occupation
                 input.form-control(type="text", name="occupation")
 
               .form-group
-                label(for="") Your Employer
+                label(for="employer") Your Employer
                 input.form-control(type="text", name="employer")
 
             fieldset
               legend Your Donation
               .form-group
-                label(for="") Amount
+                label(for="amount") Amount
                 select#amount-select.form-control(name="amount")
                   option(value="5") $5.00
                   option(value="10") $10.00
