@@ -94,8 +94,6 @@ app.get('/thank-you', function (req, res) { res.render('thank-you') })
 app.get('/donate', function (req, res) { res.render('donate') })
 
 app.post('/donate', function (req, res) {
-    console.log('token', req.body._csrf)
-    // stick the form fields in the session (having already been validated client side)
     req.session.form = {
         human_name  : req.body.human_name,
         phone       : req.body.phone,
