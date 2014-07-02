@@ -7,13 +7,18 @@ body
 
   .donation-receipt
     h1 New Donation
-    p= human_name
-    p= phone
-    p= email
+    h2 Personal Info
+    p Name: #{human_name}
+    p Phone: #{phone}
+    p Email: #{email}
 
-    p= address
+    h2 Address:
+    p #{address}
     p #{city}, #{zip_code} 
-    p= occupation
+    
+    h2 Employment: 
+    p Occupation: #{occupation}
+    p Employer: #{empployer}
 
-    p= empployer
-    p.amount= amount
+    h2 Amount
+    p.amount Amount: #{amount}
