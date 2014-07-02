@@ -3,14 +3,23 @@ block body
   section.what-can-i-do
     .container.content-wrap
       .row
+        .col-sm-12
+          h1.space Get Involved In Kate's Campaign
+
+      .row
         .col-sm-7
-          h1 Get Involved In Kate's Campaign
           p.lead What can you do to help? Volunteer your time and energy!
+          p.
+            We have some specific things in mind for the campaign that we could
+            use your help on.
 
           ul
             li Call voters
             li Put signs in your yard
+            li Put signs outside your business
             li Host a meet and greet at your house
+            li Attend Kate's events and help distribute materials and the message
+            li Put a bumper sticker on you vehicle
             li Stuff envelopes
             li Go door to door
             li Be a staff intern
@@ -18,7 +27,7 @@ block body
         .col-sm-5
           h2 Get In Touch With the Campaign
           p Drop us a line and tell us how you can volunteer your time. 
-          form#volunteer-contact.volunteer-contact(action="", method="post")
+          form#volunteer-form.volunteer-contact(action="", method="post")
             input(type="hidden", name="_csrf", value="#{csrf_token}")
             input(type="text", name="shh", class="shh")
 
@@ -34,7 +43,11 @@ block body
               .form-group
                 label.control-label(for="email") Email
                 input.form-control(type="text", name="email")
+              
+              .form-group
+                label.control-label(for="interest") What would you like to do?
+                input.form-control(type="text", name="interest")
 
               .form-group
-                button.btn.btn-lg.btn-default(type="submit") Submit
+                button.btn.btn-lg.btn-donate(type="submit") Submit
 

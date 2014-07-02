@@ -3,15 +3,16 @@
 @medium: 992px;
 @large: 1200px;
 
-@burgundy: #85343D;
-@burgundy: rgba(133, 52, 61, 0.7);
+@burgundy: #85333C;
+//@burgundy: rgba(133, 52, 61, 0.7);
 @header-banner-bg: @burgundy;
+@navbar-bg: @burgundy;
+@navbar-border: darken(@burgundy, 15%);
+@footer-bg: @burgundy;
+@footer-border: darken(@burgundy, 15%);
+@content-anchor-fg: @burgundy;
 
 @red: #dd4b39;
-@navbar-bg: @red;
-@navbar-border: darken(@red, 15%);
-@footer-bg: @red;
-@footer-border: darken(@red, 15%);
 @form-error: @red;
 
 @white: #fff;
@@ -68,7 +69,7 @@
 body {
     font-size: 18px;
     background-image: url('/img/french_parlor_pattern.png');
-    padding-top: 58px;
+    padding-top: 50px;
 }
 
 .navbar {
@@ -161,7 +162,7 @@ blockquote {
 header {
     padding-top: 1em;
     padding-bottom: 2em;
-    margin-bottom: 3em;
+    margin-bottom: 7em;
     background-image: @masthead-image;
     background-position: center center;
     border-bottom: 5px solid @header-banner-border;
@@ -170,16 +171,53 @@ header {
     height: 315px;
 
     @media (min-width: @small) {
+        padding-top: 3em;
+        margin-bottom: 0em;
+    }
+
+    @media (min-width: @medium) {
         padding-top: 2em;
+        margin-bottom: 2em;
     }
 
     .banner {
-        height: 310px; 
+        //min-height: 310px; 
+        //min-width: 1200px;
         border: 9px solid @header-banner-border;
         //background-image: @header-banner-img;
         background-position: center center;
         padding: 1em;
         background-color: @header-banner-bg;
+        overflow: hidden;
+
+        .copy {
+            text-align: center;
+
+            @media (min-width: @small) {
+                width: 58%;
+                text-align: left;
+                margin-right: 20px;
+            }
+
+            @media (min-width: @large) {
+                h1 { font-size: 46px; }
+                h2 { font-size: 40px; }
+                h3 { font-size: 34px; }
+            }
+        }
+
+        img {
+            height: 160px; margin: 0 auto; display: block;
+
+            @media (min-width: @small) { 
+                float: right;     
+            }
+
+            @media (min-width: @medium) {
+               height: 260px;  
+            }
+        }
+        
     }
 }
 
@@ -199,13 +237,21 @@ section {
     border-radius: 7px;
     padding-top: 2em;
     padding-bottom: 2em;
-    padding-left: 4em;
-    padding-right: 4em;
     color: @content-fg;
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media (min-width: @small) {
+        padding-left: 4em;
+        padding-right: 4em;
+    } 
 
     h1, h2, h3, .h1, .h2, .h3 {
         .body-text-shadow(lighten(@content-wrap-bg, 35%));
     }
+
+    a { color: @content-anchor-fg; }
 }
 
 .family {}
@@ -244,6 +290,11 @@ footer {
     .address {
         h3 { margin-top: 0; } 
         .body-text-shadow(darken(@footer-bg, 25%));
+        padding-top: 1em;
+
+        @media (min-width: @small) {
+            padding-top: 0; 
+        }
     }
 
     .byline {

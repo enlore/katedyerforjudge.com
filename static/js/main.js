@@ -1,9 +1,40 @@
 $(document).ready(function () {
     $('#timer-ultimate').countdown({ until: new Date(2014, 8 - 1, 8), compact: true })
-    $('#timer-early').countdown({until: new Date(2014, 7 - 1, 23), compact: true })
+    $('#timer-early').countdown({until: new Date(2014, 7 - 1, 18), compact: true })
 
     // Stripe
     Stripe.setPublishableKey('pk_test_gaLOWFmLlT7GpIAzmhMvmubG')
+
+    // volunteer form
+    var $volunteerForm = $('#volunteer-form')
+
+    $volunteerForm.on('submit', function (e) {
+        e.preventDefault()
+
+        var fieldsMessages = [
+            {'name': 'name', 'message': "Don't forget your name."}, 
+            {'name': 'phone', 'message': "Can we get your phone number?"},
+            {'name': 'email', 'message': "Can we also have your email?"}
+        ]
+
+        var hasError = false
+
+        for (var i = 0; i < fieldsMessages.length; i++) {
+            var selector = '[name="'+ fieldsMessages[i]['name']  + '"]'
+
+            var val = $volunteerForm.find(selector).val()
+            console.log('val of %s: %s', fieldsMessages[i]['name'], val)
+
+            if (val === '') {
+                console.log('Validation error: %s', fieldsMessages[i]['message'])  
+                hasError = true
+                $volunteerForm.find('label[for="' + fieldsMessages[i]['name']+ '"]').text(fieldsMessages[i]['message']).parent().addClass('has-error')
+            }
+
+            if (!hasError)
+                e.target.submit()
+        }
+    })
 
     // donation info form
     var $donateForm = $('#donate-form')
@@ -39,11 +70,6 @@ $(document).ready(function () {
             if (!hasError)
                 e.target.submit()
         }
-
-        // get val from input by name
-        // if empty string, reject
-        //  reject: swap out label for help message
-        //  if no rejections, submit form
     })
 
     // confirm form

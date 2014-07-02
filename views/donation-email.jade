@@ -1,12 +1,19 @@
-.donation-receipt
-  h1 New Donation
-  p= human_name
-  p= phone
-  p= email
+doctype html
+head
+body
+  style
+    h1 { border-bottom: 1px solid #DD4B39; }
+    .amount { text-align: center; font-size: 2em; background-color: #000; line-height: 30px; height; 30px; margin-top: 5em; }
 
-  p= address
-  p #{city}, #{zip_code} 
-  p= occupation
+  .donation-receipt
+    h1 New Donation
+    p= human_name
+    p= phone
+    p= email
 
-  p= empployer
-  p= amount
+    p= address
+    p #{city}, #{zip_code} 
+    p= occupation
+
+    p= empployer
+    p.amount= amount

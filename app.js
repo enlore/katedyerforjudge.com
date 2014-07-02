@@ -19,6 +19,8 @@ var express         = require('express')
 
 app.set('env', process.env.ENV || 'production')
 app.set('sender', config.sender || "app")
+app.set('domain', 'katedyerforjudge.com')
+app.set('email-recip', 'n.e.lorenson@gmail.com')
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
@@ -65,7 +67,7 @@ if (app.get('env') === 'production') {
     lessOptions.debug = false
 }
 
-app.use(helmet())
+//app.use(helmet({ nocache: false }))
 app.use(morgan(morganOptions))
 app.use(compress(compressOptions))
 app.use(cookieParser())
@@ -76,10 +78,17 @@ app.use(less(path.join(__dirname, 'less'), lessOptions))
 app.use(express.static(path.join(__dirname, 'static')))
 
 app.use(function (req, res, next) {
+    console.log(req.ip)
+    next()
+})
+
+// checking for tls
+app.use(function (req, res, next) {
     console.log('secure? %s', req.secure)
     next()
 })
 
+// csrf template setter
 app.use(function (req, res, next) {
     res.locals.csrf_token = req.csrfToken()
     next()
@@ -88,11 +97,39 @@ app.use(function (req, res, next) {
 // api
 app.get('/', function (req, res) { res.render('index') })
 app.get('/about', function (req, res) { res.render('about') })
-app.get('/get-involved', function (req, res) { res.render('get-involved') })
+app.get('/media', function (req, res) { res.render('media') })
 app.get('/thank-you', function (req, res) { res.render('thank-you') })
 
-app.get('/donate', function (req, res) { res.render('donate') })
+// volunteer form
+app.get('/get-involved', function (req, res) { res.render('get-involved') })
+app.post('/get-involved', function (req, res) {
 
+    var volunteerTemplate = path.join(__dirname, 'views', 'volunteer-email.jade')
+
+    var templateVals = {
+        human_name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        interest: req.body.interest
+    }
+
+    var recip   = app.get('email-recip')
+      , domain  = app.get('domain')
+      , subj    = 'VOLUNTEER'
+      , text    = ''
+      , html    = jade.renderFile(volunteerTemplate, templateVals)
+      ;
+
+    mg.send(app.get('sender'), recip, subj, text, html, domain, function (err) {
+        if (err)
+           throw err 
+    })
+
+    res.render('thank-you-volunteer')
+})
+
+// donation form
+app.get('/donate', function (req, res) { res.render('donate') })
 app.post('/donate', function (req, res) {
     req.session.form = {
         human_name  : req.body.human_name,
@@ -114,11 +151,8 @@ app.post('/donate', function (req, res) {
     res.redirect('/confirm')
 })
 
-app.get('/confirm', function (req, res) {
-    console.log(req.session.form)
-    res.render('confirm-donate', {form: req.session.form})
-})
-
+// donation confirmation
+app.get('/confirm', function (req, res) { res.render('confirm-donate', {form: req.session.form}) })
 app.post('/confirm', function (req, res) {
     // gen token on this request
     stripe.charges.create({
@@ -147,11 +181,11 @@ app.post('/confirm', function (req, res) {
             amount          : req.body.amount
         }
 
-        var recip = ['n.e.lorenson@gmail.com']
-          , domain = 'katedyerforjudge.com'
-          , subj    = 'New Donation'
-          , text = 'Nick Lorenson\nn.e.lorenson@gmail.com\n$20.00\ntext version'
-          , html = jade.renderFile(emailTemplate, templateVals)
+        var recip   = app.get('email-recip')
+          , domain  = app.get('domain')
+          , subj    = 'DONATION'
+          , text    = ''
+          , html    = jade.renderFile(emailTemplate, templateVals)
           ;
 
         mg.send(app.get('sender'), recip, subj, text, html, domain, function (err) {
