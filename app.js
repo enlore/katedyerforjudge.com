@@ -17,14 +17,16 @@ var express         = require('express')
   , helmet          = require('helmet')
   ;
 
+// express
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
+app.set('trust proxy', 1)
+
+// app
 app.set('env', process.env.ENV || 'production')
 app.set('sender', config.sender || "app")
 app.set('domain', 'katedyerforjudge.com')
 app.set('email-recip', 'n.e.lorenson@gmail.com')
-
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'jade')
-app.set('trust proxy', 1)
 
 var lessOptions = {
     debug: false,
@@ -82,7 +84,7 @@ app.use(function (req, res, next) {
     next()
 })
 
-// checking for tls
+// reporting on tls
 app.use(function (req, res, next) {
     console.log('secure? %s', req.secure)
     next()
