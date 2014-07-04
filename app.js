@@ -180,7 +180,7 @@ app.post('/confirm', function (req, res) {
             zip_code        : req.body.zip_code,
             occupation      : req.body.occupation,
             employer        : req.body.employer,
-            amount          : req.body.amount
+            amount          : req.session.form.amount
         }
 
         var recip   = app.get('email-recip')
