@@ -55,6 +55,29 @@ $(document).ready(function () {
 
         var hasError = false
 
+        // if other-amount is NaN, we have an error
+        // if other-amount is > 1500, we have an error
+        var $otherAmount = $('input[name="other_amount"]')
+
+        if ($otherAmount) {
+            var otherVal = Number($otherAmount.val())
+            if (isNaN(otherVal)) {
+                console.log('otherVal', otherVal)
+                var NaNMessage = 'Please be sure to enter a number. No change. Thanks!'
+                console.log(NaNMessage) 
+                $donateForm.find('label[for="other_amount"]').text(NaNMessage).parent().addClass('has-error')
+                hasError = true
+            } else if (otherVal > 1500) {
+                var tooMuchMessage = 'Donations are limited to $1500 or less.  Thanks, though.'
+                $donateForm.find('label[for="other_amount"]').text(tooMuchMessage).parent().addClass('has-error')
+                console.log(tooMuchMessage)
+                hasError = true
+            } else {
+                $donateForm.find('label[for="other_amount"]').text("Enter Amount (max $1500)").parent().removeClass('has-error')
+            }
+        
+        }
+
         for (var i = 0; i < fieldsMessages.length; i++) {
             var selector = '[name="'+ fieldsMessages[i]['name']  + '"]'
 
@@ -99,7 +122,7 @@ $(document).ready(function () {
     // Checkbox donation form handler
     var $otherCheckbox      = $('#other-checkbox')
       , $amountSelect       = $('#amount-select')
-      , $otherAmount        = $('<label for="other_amount">Other Amount</label><div class="input-group"><span class="input-group-addon">$</span><input id="other-amount" type="text" class="form-control" name="other_amount"><span class="input-group-addon">.00</span></div>')
+      , $otherAmount        = $('<label for="other_amount">Enter Amount (max $1500)</label><div class="input-group"><span class="input-group-addon">$</span><input id="other-amount" type="text" class="form-control" name="other_amount"><span class="input-group-addon">.00</span></div>')
       , $otherContainer     = $('#other-amount-container')
       ;
 
