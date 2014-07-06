@@ -32,7 +32,7 @@
 @btn-donate-bg: @teal;
 @navbar-toggle-bg: @teal; 
 @navbar-toggle-border: darken(@teal, 15%);
-@icon-bar: lighten(@teal, 15%);
+@icon-bar: lighten(@teal, 65%);
 
 @anchor-fg: lighten(@teal, 20%);
 
@@ -54,6 +54,7 @@
 
 @navy-blue: #07002A;
 @body-bg: @navy-blue;
+@img-border: @navy-blue;
 
 @black: #141414;
 @content-fg: @black;
@@ -86,6 +87,12 @@ body {
 .navbar-dyer {
     background-color: @navbar-bg;
     border-bottom: 5px solid @navbar-border;
+
+    .donate-small {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        margin-left: 15px;
+    }
     .navbar-toggle {
         background-color: @navbar-toggle-bg; 
         border: 1px solid @navbar-toggle-border;
@@ -100,6 +107,7 @@ body {
 
     .btn-donate {
         margin-bottom: 10px;
+        font-size: 1.1em;
 
         @media (min-width: @small) {
                 margin-top: 10px; 
@@ -247,6 +255,8 @@ section {
         padding-right: 4em;
     } 
 
+    img { border: 3px solid @img-border; }
+
     h1, h2, h3, .h1, .h2, .h3 {
         .body-text-shadow(lighten(@content-wrap-bg, 35%));
     }
@@ -254,10 +264,36 @@ section {
     a { color: @content-anchor-fg; }
 }
 
-.family {}
-.education {}
-.involvement {}
-.experience {}
+.img-mixin {
+    img {
+        display: block;
+        margin: 0 auto; 
+        margin-top: 40px;
+
+        @media (min-width: @small) {
+            margin: 0;     
+            margin-top: 40px;
+        }
+    }
+}
+
+.family {
+    .img-mixin;
+}
+.education {
+    .img-mixin;
+}
+.involvement {
+    .img-mixin;
+}
+.experience {
+    .img-mixin;
+}
+.media {
+    blockquote {
+        padding: 1em; 
+    }
+}
 .thank-you {
     a {
         color: lighten(@footer-bg, 10%);
@@ -320,4 +356,9 @@ footer {
             }
         }
     }
+}
+
+.err-wrap {
+    margin-top: 4em;
+    margin-bottom: 2em;
 }
