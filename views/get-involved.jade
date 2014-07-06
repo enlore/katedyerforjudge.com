@@ -1,6 +1,6 @@
 extends layouts/base
 block body
-  section.what-can-i-do
+  section.what-can-i-do#volunteer
     .container.content-wrap
       .row
         .col-sm-12
@@ -8,25 +8,31 @@ block body
 
       .row
         .col-sm-7
-          p.lead What can you do to help? Volunteer your time and energy!
+          p.lead What can you do to help Kate help you? GET INVOLVED!
           p.
             We have some specific things in mind for the campaign that we could
             use your help on.
 
           ul
+            li Volunteer your skills, time, and resources
             li Call voters
             li Put signs in your yard
             li Put signs outside your business
-            li Host a meet and greet at your house
+            li Host a meet-and-greet at your house, business, place of worship, or organization
             li Attend Kate's events and help distribute materials and the message
             li Put a bumper sticker on you vehicle
             li Stuff envelopes
             li Go door to door
             li Be a staff intern
+            li Invite Kate to speak at your next meeting or event
+            li Make a donation
 
         .col-sm-5
           h2 Get In Touch With the Campaign
-          p Drop us a line and tell us how you can volunteer your time. 
+          p.
+            Do you have questions for the candidate? Would you like to volunteer? 
+            Would you like to request an appearance? How can Kate help you?
+
           form#volunteer-form.volunteer-contact(action="", method="post")
             input(type="hidden", name="_csrf", value="#{csrf_token}")
             input(type="text", name="shh", class="shh")
