@@ -12,38 +12,38 @@ block body
             fieldset
               legend Personal Info
               .form-group
-                label(for="") Your Name
+                label(for="human_name") Your Name
                 input.form-control(type="text", name="human_name", value="#{form.human_name}")
 
               .form-group
-                label(for="") Your Phone
+                label(for="phone") Your Phone
                 input.form-control(type="text", name="phone", value="#{form.phone}")
 
               .form-group
-                label(for="") Your Email
+                label(for="email") Your Email
                 input.form-control(type="text", name="email", value="#{form.email}")
 
             fieldset
               legend Donation Info
 
               .form-group
-                label() Your Street Address
+                label(for="address") Your Street Address
                 input.form-control(type="text", name="address", value="#{form.address}")
 
               .form-group
-                label() Your City
+                label(for="city") Your City
                 input.form-control(type="text", name="city", value="#{form.city}")
 
               .form-group
-                label() Your Zip Code
+                label(for="zip_code") Your Zip Code
                 input.form-control(type="text", name="zip_code", value="#{form.zip_code}")
 
               .form-group
-                label(for="") Your Occupation
+                label(for="occupation") Your Occupation
                 input.form-control(type="text", name="occupation", value="#{form.occupation}")
 
               .form-group
-                label(for="") Your Employer
+                label(for="employer") Your Employer
                 input.form-control(type="text", name="employer", value="#{form.employer}")
           
             fieldset
@@ -54,11 +54,11 @@ block body
                 .row
                   .col-sm-6
                     label(for="card-number") Number
-                    input.form-control(type="text", size=16, data-stripe="number", value='4242424242424242')
+                    input.form-control(type="text", size=16, data-stripe="number")
 
                   .col-sm-2
                     label(for="card-cvc") CVC
-                    input.form-control(type="text", data-stripe="cvc", value='444')
+                    input.form-control(type="text", data-stripe="cvc")
 
               .form-group
                 .row
@@ -80,7 +80,7 @@ block body
 
                   .col-sm-4
                     label(for="card-exp-year") Exp Year
-                    input.form-control(type="text", data-stripe="exp-year", value='2015')
+                    input.form-control(type="text", data-stripe="exp-year")
 
              .form-group
                button.btn.btn-donate.btn-lg(type="submit") Make Your Donation
