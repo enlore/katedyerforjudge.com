@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#timer-early').countdown({until: new Date(2014, 7 - 1, 18), compact: true })
 
     // Stripe
-    Stripe.setPublishableKey('pk_test_gaLOWFmLlT7GpIAzmhMvmubG')
+    Stripe.setPublishableKey('pk_test_4KdRZshXd8fpZnzZPrwuKJ28')
 
     // volunteer form
     var $volunteerForm = $('#volunteer-form')
@@ -59,8 +59,9 @@ $(document).ready(function () {
         // if other-amount is > 1500, we have an error
         var $otherAmount = $('input[name="other_amount"]')
 
-        if ($otherAmount) {
+        if ($otherAmount.is(':visible')) {
             var otherVal = Number($otherAmount.val())
+
             if (isNaN(otherVal)) {
                 console.log('otherVal', otherVal)
                 var NaNMessage = 'Please be sure to enter a number. No change. Thanks!'
@@ -75,7 +76,6 @@ $(document).ready(function () {
             } else {
                 $donateForm.find('label[for="other_amount"]').text("Enter Amount (max $1500)").parent().removeClass('has-error')
             }
-        
         }
 
         for (var i = 0; i < fieldsMessages.length; i++) {
@@ -100,7 +100,6 @@ $(document).ready(function () {
 
     $confirmForm.on('submit', function (e) {
         e.preventDefault() 
-
 
         $confirmForm.find('[type=submit]').prop('disabled', true)
 
