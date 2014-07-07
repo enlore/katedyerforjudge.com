@@ -21,15 +21,17 @@ def stage():
     local('rm dist/dist.tar.gz')
 
 def deploy():
-    with lcd('dist'):
-        local('tar cvzf dist.tar.gz *')
-        put('dist.tar.gz', '/tmp')
+    local('tar cvzf dist/dist.tar.gz app.js static views package.json')
 
-        with cd('/var/www/katedyerforjudge.com/static'):
-            run('tar xvzf /tmp/dist.tar.gz')
+    put('dist/dist.tar.gz', '/tmp')
 
-        run('rm /tmp/dist.tar.gz')
-        local('rm dist.tar.gz')
+    with cd('/var/www/katedyerforjudge.com/static'):
+        run('tar xvzf /tmp/dist.tar.gz')
+        run('npm install')
+        run('forever restart app.js')
+
+    run('rm /tmp/dist.tar.gz')
+    local('rm dist/dist.tar.gz')
 
 def dev():
     local('nodemon -e "jade,less,js" -w js -w less -w views -x python /usr/local/bin/fab compile')
