@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 
     // Checkbox donation form handler
-    var donationInfoFieldset = "<fieldset>" +
+    var $donationInfoFieldset = "<fieldset id=\"donation-info\">" +
                                "<legend>Donation Information</legend>" +
                                '<p class="hint">' +
                                'The law requires us to collect this info.  You can put' +
@@ -153,17 +153,20 @@ $(document).ready(function () {
 
     var $otherCheckbox      = $('#other-checkbox')
       , $amountSelect       = $('#amount-select')
-      , $otherAmount        = $('<label for="other_amount">Enter Amount (max $1500)</label><div class="input-group"><span class="input-group-addon">$</span><input id="other-amount" type="text" class="form-control" name="other_amount"><span class="input-group-addon">.00</span></div>')
+      , $otherAmount        = $('<label for="other_amount">Enter Amount</label><p class="hint">The law allows for a maximum donation $1500.</p><div class="input-group"><span class="input-group-addon">$</span><input id="other-amount" type="text" class="form-control" name="other_amount"><span class="input-group-addon">.00</span></div>')
       , $otherContainer     = $('#other-amount-container')
+      , $personalInfo       = $('#personal-info')
       ;
 
     $otherCheckbox.on('change', function (e) {
         if (this.checked) {
             $amountSelect.prop('disabled', true) 
             $otherContainer.append($otherAmount)
+            $('#your-donation').after($donationInfoFieldset)
         } else {    
             $amountSelect.prop('disabled', false) 
             $otherContainer.children().remove()
+            $('#donation-info').remove()
         }
     })
 
