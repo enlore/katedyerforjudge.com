@@ -1,0 +1,72 @@
+form#donate-form.donate-form(action="", method="post")
+  input(type="hidden", name="_csrf", value="#{csrf_token}")
+  input(type="text", name="shh", class="shh")
+
+  fieldset
+    legend Personal Information
+    .form-group
+      label(for="human_name") Your Name
+      input.form-control(type="text", name="human_name")
+
+    .form-group
+      label(for="phone") Your Phone
+      input.form-control(type="text", name="phone")
+
+    .form-group
+      label(for="email") Your Email
+      input.form-control(type="text", name="email")
+
+  fieldset
+    legend Donation Information
+    p.hint.
+      The law requires us to collect this info.  You can put
+      "N/A" if you're not employed, or "self-employed" if you
+      are self employed.
+
+    p.hint.
+      If you put "self-employed", please describe what you do in
+      a couple of words.
+
+    .form-group
+      label(for="address") Your Street Address
+      input.form-control(type="text", name="address")
+
+    .form-group
+      label(for="city") Your City
+      input.form-control(type="text", name="city")
+
+    .form-group
+      label(for="zip_code") Your Zip Code
+      input.form-control(type="text", name="zip_code")
+
+    .form-group
+      label(for="occupation") Your Occupation
+      input.form-control(type="text", name="occupation")
+
+    .form-group
+      label(for="employer") Your Employer
+      input.form-control(type="text", name="employer")
+
+  fieldset
+    legend Your Donation
+    .form-group
+      label(for="amount") Amount
+      select#amount-select.form-control(name="amount")
+        option(value="5") $5.00
+        option(value="10") $10.00
+        option(value="20") $20.00
+        option(value="35") $35.00
+        option(value="50") $50.00
+        option(value="75") $75.00
+        option(value="100") $100.00
+
+      .checkbox
+        label
+          input#other-checkbox.form-control(type="checkbox", name="amount_other", value="true")
+          span &nbsp;Other
+
+      #other-amount-container
+
+  .form-group
+    button.btn.btn-donate.btn-lg(type="submit") Confirm and Enter Card
+

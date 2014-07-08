@@ -29,6 +29,8 @@ app.set('domain', 'katedyerforjudge.com')
 app.set('volunteer-recip', config.volunteer_recip || 'n.e.lorenson@gmail.com')
 app.set('donation-recip', config.donation_recip || 'n.e.lorenson@gmail.com')
 
+app.locals.pretty = true
+
 var lessOptions = {
     debug: false,
     dest: path.join(__dirname, 'static'),

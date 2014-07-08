@@ -119,6 +119,38 @@ $(document).ready(function () {
 
 
     // Checkbox donation form handler
+    var donationInfoFieldset = "<fieldset>" +
+                               "<legend>Donation Information</legend>" +
+                               '<p class="hint">' +
+                               'The law requires us to collect this info.  You can put' +
+                               '"N/A" if you\'re not employed, or "self-employed" if you are self employed.' +
+                               '</p>' +
+                               '<p class="hint">' +
+                               'If you put "self-employed", please describe what you do in a couple of words.' +
+                               '</p>' +
+                               '<div class="form-group">' +
+                               '<label for="address">Your Street Address</label>' +
+                               '<input type="text" name="address" class="form-control">' +
+                               '</div>' +
+                               '<div class="form-group">' +
+                               '<label for="city">Your City</label>' +
+                               '<input type="text" name="city" class="form-control">' +
+                               '</div>' +
+                               '<div class="form-group">' +
+                               '<label for="zip_code">Your Zip Code</label>' +
+                               '<input type="text" name="zip_code" class="form-control">' +
+                               '</div>' +
+                               '<div class="form-group">' +
+                               '<label for="occupation">Your Occupation</label>' +
+                               '<input type="text" name="occupation" class="form-control">'+
+                               '</div>'+
+                               '<div class="form-group">' +
+                               '<label for="employer">Your Employer</label>' +
+                               '<input type="text" name="employer" class="form-control">' +
+                               '</div>' +
+                               '</fieldset>';
+
+
     var $otherCheckbox      = $('#other-checkbox')
       , $amountSelect       = $('#amount-select')
       , $otherAmount        = $('<label for="other_amount">Enter Amount (max $1500)</label><div class="input-group"><span class="input-group-addon">$</span><input id="other-amount" type="text" class="form-control" name="other_amount"><span class="input-group-addon">.00</span></div>')
