@@ -156,11 +156,13 @@ app.post('/confirm', function (req, res, next) {
     console.log(req.body)
 
     var amount = req.body.amount || req.session.form.amount
+    console.log('recieved amount', amount)
 
     // gen token on this request
     stripe.charges.create({
-        // amount in CENTS
-        amount: Number(amount) * 100,
+        // ----------- amount in CENTS -----------
+        amount: Number(amount) * 100,          //x
+        // ----------- amount in CENTS -----------
         receipt_email: req.body.email,
         currency: 'usd',
         card: req.body.stripeToken,
@@ -172,7 +174,6 @@ app.post('/confirm', function (req, res, next) {
     }, function (err, charge) {
         if (err && err.type === 'StripeCardError') {
             console.log('~~~~~> Card declined') 
-            //next(new Error('Card declined'))
             next(err)
         } else if (err) {
             console.log('Stripe error: ', err) 
