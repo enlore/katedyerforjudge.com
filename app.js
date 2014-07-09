@@ -88,7 +88,7 @@ app.use(function (req, res, next) {
     next()
 })
 
-// api
+// web api
 app.get('/', function (req, res) { res.render('index') })
 app.get('/about', function (req, res) { res.render('about') })
 app.get('/media', function (req, res) { res.render('media') })
@@ -128,19 +128,24 @@ app.post('/donate', function (req, res) {
     req.session.form = {
         human_name  : req.body.human_name,
         phone       : req.body.phone,
-        email       : req.body.email,
-        address     : req.body.address,
-        city        : req.body.city,
-        zip_code    : req.body.zip_code,
-        occupation  : req.body.occupation,
-        employer    : req.body.employer
+        email       : req.body.email
     }
 
     if (req.body.amount_other) {
-        req.session.form.amount = req.body.other_amount 
+        req.session.form.big_form = true
+        req.session.form.amount     = req.body.other_amount 
+        req.session.form.address    = req.body.address,
+        req.session.form.city       = req.body.city,
+        req.session.form.zip_code   = req.body.zip_code,
+        req.session.form.occupation = req.body.occupation,
+        req.session.form.employer   = req.body.employer
     } else {
+        req.session.form.big_form = false
         req.session.form.amount = req.body.amount 
     }
+    
+    console.log('req.body', req.body)
+    console.log('req.session', req.session)
 
     res.redirect('/confirm')
 })
@@ -150,10 +155,12 @@ app.get('/confirm', function (req, res) { res.render('confirm-donate', {form: re
 app.post('/confirm', function (req, res, next) {
     console.log(req.body)
 
+    var amount = req.body.amount || req.session.form.amount
+
     // gen token on this request
     stripe.charges.create({
         // amount in CENTS
-        amount: Number(req.session.form.amount) * 100,
+        amount: Number(amount) * 100,
         receipt_email: req.body.email,
         currency: 'usd',
         card: req.body.stripeToken,
@@ -164,10 +171,11 @@ app.post('/confirm', function (req, res, next) {
         }
     }, function (err, charge) {
         if (err && err.type === 'StripeCardError') {
-            console.log('Card declined') 
-            next(new Error('Card declined'))
+            console.log('~~~~~> Card declined') 
+            //next(new Error('Card declined'))
+            next(err)
         } else if (err) {
-            console.log(err) 
+            console.log('Stripe error: ', err) 
             next(err)
         }
 
@@ -201,7 +209,13 @@ app.post('/confirm', function (req, res, next) {
     })
 })
 
+// error handler - log it and shoot an email
 app.use(function (err, req, res, next) {
+    console.log(err)
+
+    if (err.stack)
+        console.log(err.stack)
+
     var textBody = ''
 
     if (err.message && err.stack) {

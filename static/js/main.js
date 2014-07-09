@@ -179,6 +179,7 @@ $(document).ready(function () {
                                '</fieldset>';
 
 
+    // donation form expands conditionally if a person gives > $100
     var $otherCheckbox      = $('#other-checkbox')
       , $amountSelect       = $('#amount-select')
       , $otherAmount        = $('<label for="other_amount">Enter Amount</label><p class="hint">The law allows for a maximum donation $1500.</p><div class="input-group"><span class="input-group-addon">$</span><input id="other-amount" type="text" class="form-control" name="other_amount"><span class="input-group-addon">.00</span></div>')
@@ -196,6 +197,16 @@ $(document).ready(function () {
             $otherContainer.children().remove()
             $('#donation-info').remove()
         }
+    })
+
+    // confirm form features option to change donation amount
+    $('#change-amount').on('click', function (e) {
+        var $amount = $('#amount')
+        var currentAmount = $amount.data('amount') 
+        console.log(currentAmount)
+        $amount.replaceWith('<label for="amount">Enter New Amount</label><div class="input-group"><span class="input-group-addon">$</span><input class="form-control" type="text" name="amount"><span class="input-group-addon">.00</span></div>')
+        $('[name=amount]').val(currentAmount)
+        $(this).prop('disabled', true)
     })
 
     $otherAmount.on('change', function (e) {

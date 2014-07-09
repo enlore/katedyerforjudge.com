@@ -51,7 +51,9 @@ block body
               legend Your Donation
 
               .form-group
-                p.amount.h3 You offered to pledge: $#{form.amount}
+                p#amount.amount.h3(data-amount="#{form.amount}") You offered to pledge: $#{form.amount}
+
+              .form-group
                 button#change-amount.btn.btn-edit(type="button") Change Your Donation
           
             fieldset
