@@ -101,6 +101,32 @@ $(document).ready(function () {
     $confirmForm.on('submit', function (e) {
         e.preventDefault() 
 
+        var $stripeNumber   = $('#card-number')
+          , $stripeCVC      = $('#card-cvc')
+          , $stripeExpYear  = $('#card-exp-year')
+          ;
+
+        var hasError = false
+
+        if ($stripeNumber.val() === '') {
+            $('[for="card-number"]').text('Need your number.').parents('.form-group').addClass('has-error-reg')
+            hasError = true
+        } else {
+            $('[for="card-number"]').text('Number').parents('.form-group').removeClass('has-error-reg')
+        }
+
+        if ($stripeCVC.val() === '') {
+            $('[for="card-cvc"]').text('CVC?').parents('.form-group').addClass('has-error-reg')
+        } else {
+            $('[for="card-cvc"]').text('CVC').parents('.form-group').removeClass('has-error-reg')
+        }
+
+        if ($stripeExpYear.val() === '') {
+            $('[for="card-exp-year"]').text('Exp Year?').parents('.form-group').addClass('has-error-reg')
+        } else {
+            $('[for="card-exp-year"]').text('Exp Year').parents('.form-group').removeClass('has-error-reg')
+        }
+
         $confirmForm.find('[type=submit]').prop('disabled', true)
 
         Stripe.card.createToken($confirmForm, function (stat, response) {
@@ -112,7 +138,9 @@ $(document).ready(function () {
                 console.log(token)
 
                 $confirmForm.append($('<input type="hidden" name="stripeToken">').val(token))
-                e.target.submit()
+
+                if (!hasError)
+                    e.target.submit()
             }
         })
     })
