@@ -2,3 +2,4 @@ node_modules
 *.pyc
 config.json
 *.css
+dist
