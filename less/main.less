@@ -11,6 +11,7 @@
 @footer-bg: @burgundy;
 @footer-border: darken(@burgundy, 15%);
 @content-anchor-fg: @burgundy;
+@countdown-anchor: @burgundy;
 
 @red: #dd4b39;
 @form-error: @red;
@@ -354,9 +355,13 @@ footer {
     }
 
     .countdown-timer {
-        padding: 0.3em 0.2em 0 0.6em;
+        padding: 0.7em 0.2em 0.7em 0.6em;
         border-radius: 7px;
         background-color: @light-teal;     
+
+        a {
+            color: @countdown-anchor;
+        }
 
         .h3 { margin: 0; }
 
