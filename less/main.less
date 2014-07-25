@@ -56,6 +56,7 @@
 @navy-blue: #07002A;
 @body-bg: @navy-blue;
 @img-border: @navy-blue;
+@vid-border: @navy-blue;
 
 @black: #141414;
 @content-fg: @black;
@@ -270,6 +271,7 @@ section {
     } 
 
     img { border: 3px solid @img-border; }
+    video { border: 3px solid @vid-border; }
 
     h1, h2, h3, .h1, .h2, .h3 {
         .body-text-shadow(lighten(@content-wrap-bg, 35%));
@@ -294,26 +296,32 @@ section {
 .family {
     .img-mixin;
 }
+
 .education {
     .img-mixin;
 }
+
 .involvement {
     .img-mixin;
 }
+
 .experience {
     .img-mixin;
 }
+
 .media {
     blockquote {
         padding: 1em; 
     }
 }
+
 .thank-you {
     a {
         color: lighten(@footer-bg, 10%);
         //text-shadow: none; 
     }
 }
+
 .donate {
     img {
         margin-bottom: 20px; 
@@ -325,6 +333,25 @@ section {
 
     @media  (min-width: @small) {
         padding-bottom: 4em;
+    }
+}
+
+.social-media-involvement {
+    .screencast {
+       width: 400px;  
+
+       @media (min-width: @small) {
+            width: 600px; 
+       }
+
+       @media (min-width: @medium) {
+            width: 800px; 
+       }
+    }
+
+    img, video {
+        margin-top: 2em; 
+        margin-bottom: 2em;
     }
 }
 
